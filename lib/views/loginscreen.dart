@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:mytutor/views/mainscreen.dart';
+import 'package:mytutor/views/registerscreen.dart';
+import '/models/user.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -40,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Image.asset('assets/login.png')
                 ),
                 const Text(
-                  "Login",style: TextStyle(fontSize: 24),
+                  "Login",style: TextStyle(fontSize: 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5), 
@@ -74,13 +76,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       child: SizedBox(
                         width: screenWidth,
-                        height: 50,
+                        height: 35,
                         child: ElevatedButton(
                           child: const Text("Login"),
                           onPressed: _loginUser,
                         )
                       )
-                    ,)
+                    ,),
+                    Padding(
+                    padding: EdgeInsets.only(top: 5),),
+                    Container(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: screenWidth,
+                        height: 35,
+                        child: ElevatedButton(
+                          child: const Text("Register"),
+                          onPressed: _registerUser,
+                        )
+                      )
+                    ,),
+                    
               ],)
 
           )
@@ -107,10 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
           var data = jsonDecode(response.body);
           print(data);
           if (response.statusCode == 200 && data['status'] == 'success') {
-            String name = data['data']['name'];
-            String email = data['data']['email'];
-            print(name);
-            print(email);
+            User user = User.fromJson(data['data']);
             Fluttertoast.showToast(
                 msg: "Success",
                 toastLength: Toast.LENGTH_SHORT,
@@ -119,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontSize: 16.0);
 
             Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => MainScreen(name: name, email: email)));
+                MaterialPageRoute(builder: (context) => MainScreen(user: user,)));
           } else {
             Fluttertoast.showToast(
                 msg: "Failed",
@@ -130,5 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         });
       }
+    }
+
+    void _registerUser(){
+      Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => RegisterScreen()));
     }
   }

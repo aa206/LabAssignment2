@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '/models/user.dart';
 
 class MainScreen extends StatefulWidget {
-  final String name, email;
-  const MainScreen({Key? key, required this.name, required this.email}) : super(key: key);
+  final User user;
+  const MainScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -19,8 +20,8 @@ class _MainScreenState extends State<MainScreen> {
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(widget.name),
-                accountEmail: Text(widget.email),
+                accountName: Text(widget.user.name.toString()),
+                accountEmail: Text(widget.user.email.toString()),
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: NetworkImage(
                     "https://static.wikia.nocookie.net/line/images/b/bb/2015-brown.png/revision/latest?cb=20150808131630")),
@@ -45,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         body: Center(
           child: Container(
-            child: Text('Hello World'),
+            child: Text('Hi! Welcome to MY Tutor!'),
           ),
         ),
     );
