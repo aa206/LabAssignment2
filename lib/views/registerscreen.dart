@@ -255,7 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 onPressed: () async {
                   Navigator.of(context).pop();
-                  _insertProduct();
+                  _insertInfo();
                 },
               ),
               TextButton(
