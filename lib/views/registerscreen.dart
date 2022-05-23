@@ -274,7 +274,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  void _insertProduct() {
+  void _insertInfo() {
     String _prname = _prnameEditingController.text;
     String _premail = _premailEditingController.text;
     String _prphoneno = _prphonenoEditingController.text;
